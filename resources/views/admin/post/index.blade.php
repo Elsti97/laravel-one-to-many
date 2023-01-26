@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">Lista dei post</h1>
+    <div class="text-center">
+        <h1>Lista dei post</h1>
+        <button class="btn btn-success">
+            <a class="text-white" href="{{ route('admin.post.create') }}">Crea nuovo post</a>
+        </button>
+    </div>
+
 
     <div class="container">
 
@@ -9,6 +15,9 @@
             <div>
                 <h3>{{ $elem->title }}</h3>
                 <div>{{ $elem->body }}</div>
+                @if ($elem->category)
+                    {{$elem->category['name']}}
+                @endif
             </div>
 
 
@@ -30,7 +39,7 @@
                         ELIMINA
                     </button>
                 </form>
-                </div>
+            </div>
         @endforeach
 
     </div>

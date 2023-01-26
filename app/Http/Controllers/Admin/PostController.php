@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,9 @@ class PostController extends Controller
         // $user = Auth::user();
 
         $posts = Post::All();
+        // $posts = [
+        //     'posts' => Post::with('categories')->paginate(2)
+        // ];
 
         return view('admin.post.index', compact('posts'));
     }
@@ -33,7 +37,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::All();
+
+        return view('admin.post.create', compact('categories'));
     }
 
     /**
@@ -49,7 +55,7 @@ class PostController extends Controller
         $new_post->fill($posts);
         $new_post->save();
 
-        return redirect()->route('home');
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -73,6 +79,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        $categories = Category::findOrFail();
 
         return view('admin.post.edit', compact('post'));
     }
