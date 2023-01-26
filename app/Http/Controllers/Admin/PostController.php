@@ -22,12 +22,16 @@ class PostController extends Controller
         // $userId = Auth::id();
         // $user = Auth::user();
 
-        $posts = Post::All();
-        // $posts = [
-        //     'posts' => Post::with('categories')->paginate(2)
-        // ];
+        // $posts = Post::All();
+        // $posts = Post::with('categories')->get();
+        // $category = Category::All();
+        // $data = [
+        $data = [
+            'posts' => Post::with('category')->get()
+            // 'categories' => Category::All()
+        ];
 
-        return view('admin.post.index', compact('posts'));
+        return view('admin.post.index', $data);
     }
 
     /**
@@ -79,9 +83,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        $categories = Category::findOrFail();
+        $categories = Category::All();
 
-        return view('admin.post.edit', compact('post'));
+        return view('admin.post.edit', compact('post', 'categories'));
     }
 
     /**

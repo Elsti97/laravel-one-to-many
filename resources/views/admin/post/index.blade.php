@@ -12,11 +12,11 @@
     <div class="container">
 
         @foreach ($posts as $elem)
-            <div>
-                <h3>{{ $elem->title }}</h3>
+            <div class="mt-3">
+                <h3>Titolo: {{ $elem->title }}</h3>
                 <div>{{ $elem->body }}</div>
                 @if ($elem->category)
-                    {{$elem->category['name']}}
+                    <h5>La categoria è: {{ $elem->category->name }}</h5>
                 @endif
             </div>
 

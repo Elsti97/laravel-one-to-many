@@ -26,7 +26,7 @@
                     <option value="">Seleziona</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
-                            {{$category->id == old('category_id', $posts->category_id) ? 'selected' : ''}}>
+                            {{$category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>
                             {{ $category->name }}
                         </option>
                     @endforeach
